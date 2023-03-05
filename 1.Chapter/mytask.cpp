@@ -17,7 +17,7 @@ myTask::myTask(QString name, QWidget *parent) :
     {
         emit removeTask(this);
     });
-
+    connect(ui->edit, &QPushButton::clicked, this, &myTask::editName);
     connect(ui->checkBox, &QCheckBox::toggled, this, &myTask::checked);
 }
 
@@ -49,5 +49,17 @@ void myTask::checked(bool check)
     ui->checkBox->setFont(font);
 
     emit statusChanged();
+}
+
+void myTask::editName(const bool &ok)
+{
+    bool enter;
+
+    QString taskName = QInputDialog::getText(this, tr("Set Task name"), tr("Enter the task name"), QLineEdit::Normal, tr("Untitle task"), &enter);
+
+    if(enter && !taskName.isEmpty())
+    {
+        ui->checkBox->setText(taskName);
+    }
 }
 

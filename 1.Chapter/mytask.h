@@ -26,6 +26,7 @@ signals:
 
 private slots:
     void checked(bool check);
+    void editName(const bool &ok);
 
 private:
     Ui::myTask *ui;
